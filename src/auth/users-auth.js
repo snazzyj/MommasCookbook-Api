@@ -5,18 +5,18 @@ const {TEST_DATABASE_URL} = require('../config');
 const userAuthRouter = express.Router();
 const jsonParser = express.json();
 
-const serializeUser = user => ({
-    name: user.name,
-    email: user.email,
-    password: user.password
-});
+// const serializeUser = user => ({
+//     firstName: user.first_name,
+//     lastName: user.last_name,
+//     email: user.email,
+//     password: user.password
+// });
 
 userAuthRouter
     .route('/login')
     .post(jsonParser, (req, res, next) => {
         const {email, password} = req.body;
         const loginUser = {email, password};
-        console.log(loginUser)
 
         UserAuthService.getUserWithEmail(
             req.app.get('db'),
@@ -48,7 +48,7 @@ userAuthRouter
                         let user = {
                             id: dbUser.id,
                             firstName: dbUser.first_name,
-                            recipeData: []
+                            recipeData: data
                         }
                         res.send({
                             authToken: UserAuthService.createJwt(sub, payload),
@@ -82,7 +82,6 @@ userAuthRouter
                         password: hashedPassword,
                         first_name: firstName,
                         last_name: lastName
-
                     }
 
                     return UserAuthService.insertUser(
@@ -90,7 +89,18 @@ userAuthRouter
                         newUser
                     )
                     .then(user => {
-                        res.status(201).json(serializeUser(user)).send(user)
+                        const sub = user.email;
+                        const payload = {user_id: user.id}
+                        let newUserInfo = {
+                            id: user.id,
+                            firstName: user.first_name,
+                            recipeData: []
+                        }
+                        console.log({newUserInfo})
+                        res.send({
+                            authToken: UserAuthService.createJwt(sub, payload),
+                            newUserInfo
+                        })
                     })
                 })
         })
