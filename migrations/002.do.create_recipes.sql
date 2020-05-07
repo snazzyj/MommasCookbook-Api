@@ -4,7 +4,7 @@ CREATE TABLE recipes (
     recipe_name TEXT NOT NULL,
     ingredients TEXT [] NOT NULL,
     directions TEXT [] NOT NULL,
-    prepTime TEXT NOT NULL,
-    cookTime TEXT NOT NULL,
-    servingSize TEXT NOT NULL
+    preptime TEXT NOT NULL,
+    cooktime TEXT NOT NULL,
+    servingsize TEXT NOT NULL
 )
