@@ -6,5 +6,6 @@ CREATE TABLE recipes (
     directions TEXT [] NOT NULL,
     preptime TEXT NOT NULL,
     cooktime TEXT NOT NULL,
-    servingsize TEXT NOT NULL
+    servingsize TEXT NOT NULL,
+    recipe_tags TEXT NOT NULL
 )

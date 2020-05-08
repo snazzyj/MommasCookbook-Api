@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const {NODE_ENV} = require('./config');
 const userAuth = require('./auth/users-auth');
 const recipeRoute = require('./recipes/recipe-route');
+const searchRoute = require('./search/search-route');
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use('/api/auth', userAuth);
 //route to post a new recipe, inserts recipe into db
 //get req to get a recipe by id
 app.use('/api/recipes', recipeRoute);
+
+app.use('/api/search', searchRoute);
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')
