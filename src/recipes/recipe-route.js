@@ -7,16 +7,19 @@ const jsonParser = express.json();
 recipeRouter
     .route('/')
     .post(jsonParser, (req, res, next) => {
-        const {id, recipeName, ingredients, directions, prepTime, cookTime, servingSize} = req.body
+        const {creator_id, recipeName, ingredients, directions, prepTime, cookTime, servingSize, recipe_tags} = req.body
         const newRecipe = {
-            creator_id: id,
+            creator_id,
             recipe_name: recipeName,
             ingredients,
             directions,
             preptime: prepTime,
             cooktime: cookTime,
-            servingsize: servingSize
+            servingsize: servingSize,
+            recipe_tags
         }
+
+        console.log(newRecipe)
 
         RecipeService.insertNewRecipe(
             req.app.get('db'),
