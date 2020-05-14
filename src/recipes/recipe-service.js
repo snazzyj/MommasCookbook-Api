@@ -11,6 +11,18 @@ const RecipeService = {
 
     getRecipeById(knex, id) {
         return knex.select('*').from('recipes').where('recipe_id', id)
+    },
+
+    updateRecipe(knex, id, recipeToUpdate) {
+        return knex.from('recipes')
+            .where('recipe_id', id)
+            .update(
+                recipeToUpdate,
+                 ['recipe_id', 'creator_id', 'recipe_name',
+                  'ingredients','directions', 'preptime',
+                   'cooktime', 'servingsize', 'recipe_tags' ]
+                )
+            
     }
 }
 

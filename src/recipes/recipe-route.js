@@ -43,5 +43,24 @@ recipeRouter
             res.status(200).send(recipe)
         })
     })
+    .patch(jsonParser, (req, res, next) => {
+        const {id} = req.params;
+        const {creator_id, recipe_id, recipe_tags,
+               ingredients, directions, preptime,
+               cooktime, servingsize, recipe_name} = req.body
+        const recipeToUpdate = {creator_id, recipe_id, recipe_tags,
+                                ingredients, directions, preptime,
+                                cooktime, servingsize, recipe_name}
+        
+        RecipeService.updateRecipe (
+            req.app.get('db'),
+            id,
+            recipeToUpdate
+        )
+        .then(updatedRecipe => {
+            res.status(200).send(updatedRecipe)
+        })
+        .catch(next)
+    })
 
 module.exports = recipeRouter;
