@@ -5,11 +5,12 @@ const {TEST_DATABASE_URL} = require('../config');
 const userAuthRouter = express.Router();
 const jsonParser = express.json();
 
-// const serializeUser = user => ({
+const serializeUser = user => {
+    console.log({user})
+} 
+// ({
 //     firstName: user.first_name,
-//     lastName: user.last_name,
 //     email: user.email,
-//     password: user.password
 // });
 
 userAuthRouter
@@ -69,7 +70,6 @@ userAuthRouter
             email
         )
         .then(user => {
-
             if(user) {
                 res.status(400).json({
                     error: {message: 'Email already exists'}
@@ -94,13 +94,12 @@ userAuthRouter
                         let newUserInfo = {
                             id: user.id,
                             firstName: user.first_name,
-                            recipeData: []
+                            recipeData: [],
+                            
                         }
-                        console.log({newUserInfo})
                         res.send({
                             authToken: UserAuthService.createJwt(sub, payload),
-                            newUserInfo
-                        })
+                            newUserInfo})
                     })
                 })
         })
