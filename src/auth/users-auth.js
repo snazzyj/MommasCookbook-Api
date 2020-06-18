@@ -5,14 +5,6 @@ const {TEST_DATABASE_URL} = require('../config');
 const userAuthRouter = express.Router();
 const jsonParser = express.json();
 
-const serializeUser = user => {
-    console.log({user})
-} 
-// ({
-//     firstName: user.first_name,
-//     email: user.email,
-// });
-
 userAuthRouter
     .route('/login')
     .post(jsonParser, (req, res, next) => {

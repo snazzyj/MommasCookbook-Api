@@ -5,7 +5,6 @@ const SearchService = {
             .from('recipes')
             .where('recipe_tags', 'ilike', `%${query}%`)
             .then(result => {
-                console.log({result})
                 return result;
             })
     }

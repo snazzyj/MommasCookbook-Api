@@ -19,8 +19,6 @@ recipeRouter
             recipe_tags
         }
 
-        console.log(newRecipe)
-
         RecipeService.insertNewRecipe(
             req.app.get('db'),
             newRecipe
