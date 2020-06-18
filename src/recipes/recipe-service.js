@@ -23,6 +23,11 @@ const RecipeService = {
                    'cooktime', 'servingsize', 'recipe_tags' ]
                 )
             
+    },
+    deleteRecipe(knex, id) {
+        return knex.from('recipes')
+            .where('recipe_id', id)
+            .delete()
     }
 }
 

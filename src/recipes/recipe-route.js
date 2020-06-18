@@ -62,5 +62,15 @@ recipeRouter
         })
         .catch(next)
     })
+    .delete((req, res, next) => {
+        RecipeService.deleteRecipe(
+            req.app.get('db'),
+            req.params.id
+        )
+        .then(numRowsAffected => {
+            res.status(204).end()
+        })
+        .catch(next)
+    })
 
 module.exports = recipeRouter;
