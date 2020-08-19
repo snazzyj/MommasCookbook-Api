@@ -1,6 +1,5 @@
 const express = require('express');
 const UserAuthService = require('./users-auth-service');
-const {TEST_DATABASE_URL} = require('../config');
 
 const userAuthRouter = express.Router();
 const jsonParser = express.json();
